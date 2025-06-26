@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoLinker.Web", "CryptoLinker.Web\CryptoLinker.Web.csproj", "{C646F185-1C7F-4DEF-8F33-229CC07AEEAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoLinker.Core", "CryptoLinker.Core\CryptoLinker.Core.csproj", "{22F49AF4-9ADA-4D6D-8FDA-A3373B003074}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C646F185-1C7F-4DEF-8F33-229CC07AEEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C646F185-1C7F-4DEF-8F33-229CC07AEEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C646F185-1C7F-4DEF-8F33-229CC07AEEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C646F185-1C7F-4DEF-8F33-229CC07AEEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F49AF4-9ADA-4D6D-8FDA-A3373B003074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F49AF4-9ADA-4D6D-8FDA-A3373B003074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F49AF4-9ADA-4D6D-8FDA-A3373B003074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F49AF4-9ADA-4D6D-8FDA-A3373B003074}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {884302AC-3EBD-46FE-85A6-DF00A5A84EC1}
+	EndGlobalSection
+EndGlobal
