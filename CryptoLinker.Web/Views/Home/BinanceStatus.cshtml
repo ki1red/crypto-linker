@@ -1,0 +1,14 @@
+﻿
+<script>
+    window.api = {
+        binanceStatus: '@Url.Action("GetBinanceStatus", "Home")'
+    };
+</script>
+
+<script src="~/js/binanceStatus.js"></script>
+
+<!--Статус доступности-->
+<div class="mb-2 text-muted" style="font-size: 0.9em;">
+    Binance: <span id="binance-status">-</span><br />
+    Время: <span id="binance-time">-</span>
+</div>

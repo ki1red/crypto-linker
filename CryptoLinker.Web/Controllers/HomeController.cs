@@ -1,6 +1,7 @@
 using CryptoLinker.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using CryptoLinker.Core.Services;
 using System.Text.Json;
 
 namespace CryptoLinker.Web.Controllers
@@ -16,6 +17,12 @@ namespace CryptoLinker.Web.Controllers
 
         public IActionResult Index()
         {
+            // TODO
+            // подсчитывать сколько какой валюты
+            // запрашивать ценность каждой валюты
+            // рассчитывать курс в таблице
+            // добавить возможность менять количество валюты в портфеле
+
             return View();
         }
 
@@ -31,6 +38,7 @@ namespace CryptoLinker.Web.Controllers
         }
 
         [HttpGet]
+        // Проверяем доступность Binance и получаем время сервера
         public async Task<JsonResult> GetBinanceStatus()
         {
             var service = new BinanceStatusService();
@@ -43,47 +51,12 @@ namespace CryptoLinker.Web.Controllers
                 if (isOnline)
                     serverTime = await service.GetServerTimeAsync();
             }
-            catch (Exception ex) // TODO нужно ли?
+            catch
             {
                 isOnline = false;
             }
 
             return Json(new { isOnline, serverTime });
-        }
-    }
-
-    public class BinanceStatusService
-    {
-        private const string URL = "https://api.binance.com";
-        private const string ForPing = "/api/v3/ping";
-        private const string ForTestTime = "api/v3/time";
-
-        private readonly HttpClient _httpClient;
-
-        public BinanceStatusService()
-        {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(URL)
-            };
-        }
-
-        // Считаем время доступности до бинанса
-        public async Task<long> GetServerTimeAsync()
-        {
-            var response = await _httpClient.GetAsync(ForTestTime);
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-            using var doc = JsonDocument.Parse(json);
-            return doc.RootElement.GetProperty("serverTime").GetInt64();
-        }
-
-        // Проверяем доступность бинанса
-        public async Task<bool> PingAsync()
-        {
-            var response = await _httpClient.GetAsync(ForPing);
-            return response.IsSuccessStatusCode;
         }
     }
 }
