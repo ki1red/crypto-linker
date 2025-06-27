@@ -1,9 +1,11 @@
-﻿@{
+﻿@model CryptoLinker.Web.Models.PortfolioViewModel
+@{
     ViewBag.Title = "Крипто Портфель";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @await Html.PartialAsync("BinanceStatus")
+@await Html.PartialAsync("PortfolioTable", Model) <!--передаём модель в портфель-->
 
 <!--<div class="text-center">
     <h1 class="display-4">Welcome</h1>

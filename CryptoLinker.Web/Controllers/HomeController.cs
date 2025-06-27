@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CryptoLinker.Core.Services;
 using System.Text.Json;
+using CryptoLinker.Core.Models;
 
 namespace CryptoLinker.Web.Controllers
 {
@@ -10,20 +11,36 @@ namespace CryptoLinker.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private static List<PortfolioItem> _portfolioItems = new()
+        {
+            new PortfolioItem { Symbol = "BTC", Amount = 1m },
+            new PortfolioItem { Symbol = "XRP", Amount = 15000m },
+            new PortfolioItem { Symbol = "XMR", Amount = 50m },
+            new PortfolioItem { Symbol = "DASH", Amount = 30m }
+        };
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index() // асинхронный стал
         {
+            var calculator = new PortfolioCalculator(_portfolioItems);
+            var result = await calculator.CalculateAsync();
+
+            var model = new PortfolioViewModel
+            {
+                Items = _portfolioItems,
+                Calculated = result
+            };
             // TODO
             // подсчитывать сколько какой валюты
             // запрашивать ценность каждой валюты
             // рассчитывать курс в таблице
             // добавить возможность менять количество валюты в портфеле
 
-            return View();
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -41,7 +58,7 @@ namespace CryptoLinker.Web.Controllers
         // Проверяем доступность Binance и получаем время сервера
         public async Task<JsonResult> GetBinanceStatus()
         {
-            var service = new BinanceStatusService();
+            var service = new RialtoStatusService();
             bool isOnline;
             long serverTime = 0;
 

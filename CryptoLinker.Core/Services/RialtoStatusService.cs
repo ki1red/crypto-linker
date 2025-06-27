@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace CryptoLinker.Core.Services
 {
-    public class BinanceStatusService
+    public class RialtoStatusService
     {
         private const string BaseUrl = "https://api.binance.com";
         private const string ForPing = "/api/v3/ping";
@@ -13,7 +13,7 @@ namespace CryptoLinker.Core.Services
 
         private readonly HttpClient _httpClient;
 
-        public BinanceStatusService()
+        public RialtoStatusService()
         {
             _httpClient = new HttpClient
             {
