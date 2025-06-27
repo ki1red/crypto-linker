@@ -40,6 +40,11 @@ namespace CryptoLinker.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Edit()
+        {
+            return View(new PortfolioViewModel { Items = _portfolioItems });
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -79,6 +84,13 @@ namespace CryptoLinker.Web.Controllers
             var calculator = new PortfolioCalculator(_portfolioItems);
             var result = await calculator.CalculateAsync();
             return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult Save(List<PortfolioItem> items)
+        {
+            _portfolioItems = items;
+            return RedirectToAction("Index");
         }
     }
 }

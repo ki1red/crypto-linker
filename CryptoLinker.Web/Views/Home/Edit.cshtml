@@ -1,0 +1,44 @@
+﻿@model CryptoLinker.Web.Models.PortfolioViewModel
+
+@{
+	ViewBag.Title = "Редактировать портфель";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать портфель</h2>
+
+@using (Html.BeginForm("Save", "Home", FormMethod.Post))
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Валюта</th>
+				<th>Количество</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (int i = 0; i < Model.Items.Count; i++)
+			{
+				<tr>
+					<td>
+						@Html.TextBoxFor(mbox => mbox.Items[i].Symbol, new { 
+							@class = "form-control", 
+							@readonly = "readonly" 
+						})
+					</td>
+					<td> <!--TODO Валидация ввода только со стороны веба, без сервака-->
+						@Html.TextBoxFor(mbox => mbox.Items[i].Amount, new { 
+							@class = "form-control", 
+							type = "number", 
+							step = "any",
+							min = "0",
+							oninput = "this.value = this.value.replace(/[^0-9.]/g, '')"
+						})
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<button type="submit" class="btn btn-success">Сохранить</button>
+}
