@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model CryptoLinker.Web.Models.PortfolioViewModel
+
+<script>
+	window.rialto.rates = '@Url.Action("GetRates", "Home")';
+</script>
+
+@if (Model.Calculated != null)
+{
+	<h2>Результат перерасчёта</h2>
+
+	var allTargets = Model.Calculated.SelectMany(c => c.Value.Keys).Distinct().ToList();
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Из</th>
+				@foreach (var target in allTargets)
+				{
+					<th>@target</th>
+				}
+			</tr>
+		</thead>
+		<tbody id="rates-body">
+			<tr>
+				<td colspan="1000" style="text-align:center; font-style:italic; color:#666;">Загрузка</td>
+			</tr>
+		</tbody>
+	</table>
 }
+
+<!--Время последнего обновления данных с биржи-->
+<p class="text-muted" id="last-updated" style="font-size: 0.9em; display: none;">
+	Последнее сохранение: <span id="seconds-ago">-</span> сек назад
+</p>
+
+<script src="~/js/rialtoRates.js"></script>

@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@await Html.PartialAsync("BinanceStatus")
-@await Html.PartialAsync("PortfolioTable", Model) <!--передаём модель в портфель-->
+<script>
+    window.rialto = {};
+</script>
 
-<!--<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>-->
+@await Html.PartialAsync("RialtoStatus")
+@await Html.PartialAsync("PortfolioTable", Model)
+@await Html.PartialAsync("RateTable", Model)

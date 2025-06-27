@@ -1,0 +1,11 @@
+﻿<script>
+    window.rialto.status = '@Url.Action("GetRialtoStatus", "Home")';
+</script>
+
+<!--Статус доступности-->
+<div class="mb-2 text-muted" style="font-size: 0.9em;">
+    Binance: <span id="rialto-status">-</span><br />
+    Время: <span id="rialto-time">-</span>
+</div>
+
+<script src="~/js/rialtoStatus.js"></script>

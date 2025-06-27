@@ -35,9 +35,6 @@ namespace CryptoLinker.Web.Controllers
                 Calculated = result
             };
             // TODO
-            // подсчитывать сколько какой валюты
-            // запрашивать ценность каждой валюты
-            // рассчитывать курс в таблице
             // добавить возможность менять количество валюты в портфеле
 
             return View(model);
@@ -56,7 +53,7 @@ namespace CryptoLinker.Web.Controllers
 
         [HttpGet]
         // Проверяем доступность Binance и получаем время сервера
-        public async Task<JsonResult> GetBinanceStatus()
+        public async Task<JsonResult> GetRialtoStatus()
         {
             var service = new RialtoStatusService();
             bool isOnline;
@@ -74,6 +71,14 @@ namespace CryptoLinker.Web.Controllers
             }
 
             return Json(new { isOnline, serverTime });
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetRates()
+        {
+            var calculator = new PortfolioCalculator(_portfolioItems);
+            var result = await calculator.CalculateAsync();
+            return Json(result);
         }
     }
 }
